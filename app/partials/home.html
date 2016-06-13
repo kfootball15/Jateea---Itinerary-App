@@ -1,0 +1,43 @@
+<div class="container-fluid" style="margin: 0 400px;">
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="panel" style="height:400px; overflow: scroll; background-color: green;">
+        <div class="panel-body">
+          <h3 style="color: white">ADD A TRIP</h3>
+          <a href="/createTrip" role="button" class="btn btn-default" style="border-radius: 20px;">+</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4" ng-repeat="trip in trips">
+      <div class="panel" style="height:400px; overflow: scroll">
+        <div class="panel-body">
+          <h3>{{trip.name}}</h3>
+          <a
+          ng-href="/trips/{{trip._id}}"
+          role="button"
+          class="btn btn-default">
+            View Trip
+          </a>
+          <p style="height:75px; overflow: scroll; margin: 0 0 15px 0; box-shadow: inset 0 0 5px #000000;">{{trip.description}}</p>
+          <div class="tagWrapper">
+            <div ng-repeat="location in trip.locations" style="overflow: scroll;">
+              <div ng-style="{{location.style}}">
+                <img class="userTags" ng-src="{{location.image || location.tag}}">
+                <label class="tagLabel"> {{location.name}} </label>
+              </div>
+            </div>
+          </div>
+          <div class="tagWrapper">
+            <div ng-repeat="user in trip.users" style="overflow: scroll;">
+              <div  ng-style="{{user.style}}">
+                <img class="userTags" ng-src="{{user.picture || user.gravatar}}">
+                <label class="tagLabel"> {{user.name}} </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

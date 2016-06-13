@@ -1,0 +1,62 @@
+<div class="container">
+  <div class="panel">
+    <div class="panel-body">
+<!--       <div ng-if="messages.error" role="alert" class="alert alert-danger">
+        <div ng-repeat="error in messages.error">{{error.msg}}</div>
+      </div>
+      <div ng-if="messages.success" role="alert" class="alert alert-success">
+        <div ng-repeat="success in messages.success">{{success.msg}}</div>
+      </div> -->
+      <form ng-submit="createTrip()" class="form-horizontal">
+        <legend>Create Trip</legend>
+        <div class="form-group">
+          <label for="email" class="col-sm-3">Name</label>
+          <div class="col-sm-7">
+            <input type="text" name="name" id="name" class="form-control" ng-model="profile.name">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="name" class="col-sm-3"> Description </label>
+          <div class="col-sm-7">
+            <input type="text" name="description" id="description" class="form-control" ng-model="profile.description">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="name" class="col-sm-3"> Begin Date </label>
+          <div class="col-sm-7">
+            <input type="text" id="datepicker1" ng-model="profile.begin">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="name" class="col-sm-3"> End Date </label>
+          <div class="col-sm-7">
+            <input type="text" id="datepicker2" ng-model="profile.end">
+          </div>
+        </div>
+        <div class="form-group" style="overflow: scroll;">
+          <label class="col-sm-3">Users</label>
+          <div
+          ng-repeat="user in allUsers"
+          style="display: inline-block; padding: 10px;">
+            <img ng-src="{{user.gravatar}}" ng-click="addUser(user)" class="tagsCreate" >
+            <p style="text-align: center">{{user.name}}</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3">Locations</label>
+          <div
+          ng-repeat="location in allLocations"
+          style="display: inline-block; padding: 10px;">
+            <img ng-src="{{location.tag}}" ng-click="addLocation(location)" class="tagsCreate" >
+            <p style="text-align: center">{{location.name}}</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-3 col-sm-4">
+            <button type="submit" class="btn btn-success">Create Trip!</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

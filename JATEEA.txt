@@ -1,0 +1,177 @@
+JATEEA
+
++ TO DO
+    + Set up Github
+    + Push to Heroku and start hosting
+    + See Below
+
++Trips
+    +Locations
+        +Events
+            +Location
+                +coordinates
+                +name
+                    +Important for twitter
+            +Priority
+                +1-3
+            +Desired Duration
+            +Twitter Keywords?
+                +These can be added by user (or maybe just an array that gets the location name etc pushed in?)
+        +Food
+            +Location
+            +Priority
+            +Meal
+                +Breakfast, Lunch, Dinner
+            +Twitter Keywords?
+    +Schedule
+
++Algorithms
+    +Day Organizer ("Re-Organize/Optimize my Day" Button):
+        +Select a bunch of stuff to do in a city
+        +Split the events up by location and spread them out evenly and in time slots determined by how far apart each destination is and how long we want to spend there
+        +Breaks at predetermined times for food and rest
+        +Have the option to save the Re-Organized Day or Discard
+    +Twitter
+        +Gather how crowded a destination is based on Twitter
+        +Gather how popular a destination is on specific days of week and over the last month or so
+        +Color of event div changes based on how popular/frequently it is tweeted about
+        +On Map view, have indications for destinations/areas/restaurants that are being tweeted about currently in the city you are in.
+    +Event Reccomendation Engine
+        +Uses Twitter to gather popular locations being discussed in a city and spits out reccomendations
+        with ALL event properties
+            +In other words, it gathers from twitter a possible event/restaurant, and CREATES an entire event around it with a priority setting (How highly reccomended), a suggested duration, a location, and an image
+
+
+
+How The App will work
+    +Navbar Tabs
+        +Home (Current Trip? Or Something else? Like photos from trip, or just make A list of trips the main page)
+        +Trips
+    +Secondary Navbar
+        +Map View
+            +All events and locations for the day
+            *Directions from Destination A to Z, in order of itinerary
+        +Itinerary/Edit View
+            +Look into using Google Calendar API
+            +List of all events shown by time and Duration
+                +Click an even to edit it
+                +Account for overlapping times?
+            +An Add event button that takes you to Add Event Page
+            *Stretch: Twitter feed that looks for the destination/city and shows what is being said and maybe makes some assumptions based on the activity
+    +Add Event Page
+        +Lets you search an event destination and add it to your itinerary with a time, priority, and desired duration
+
+
+How These Models/Routes will fit together
+    Each TRIP will have a a number of LOCATIONS associated with them
+        This location will appear as a color in the calendar view and will be written somewhere on the screen
+    Each LOCATION will have a bunch of DAYS associated with them
+        These
+    Each DAY will have a bunch of EVENTS associated with them
+
+    When a Trip is loaded, each location for that trip is loaded with a pre-set number of empty days and an empty list of events to the left
+    When the user is ready, he creates events to his event list and drags them onto his calendar and sets its duration
+        -Dragging an event onto the calendar for the first time automatically saves its properties (duration, begin/end time, and priority). Subsequent drags and adjustments will not save to database until user clicks on "Save" Button
+        -Clicking Save will update the event with a new begin and end time, and a duration, and possibly a new priority
+
+    When a Day is saved/updated/created, a MAP view is created with tags for each location and a route to navigate through it.
+
+
+
+Models
+    +Trip
+        +Begin Date
+            +Date
+        +End Date
+            +date
+        +Name
+            +String
+    +Location
+        +Trip
+            +ref to a Trip
+        +Begin Date
+            +Date
+        +End Date
+            +Date
+        +Name
+            +String
+        +Coordinates
+            +Array of Numbers
+                + two Numbers --> Coordinates
+        +Flag Image
+            +For Google Maps Pointer
+    +Day (reference a trip)
+        +coordinates
+            +Array
+                refs to a Locations
+            +if Location Array is greater then 1, it should be a SPLIT view, meaning a travel day
+        +Date
+            +Date(?)
+        +Events
+            +Array of ObjectIDs that get POPULATED!!!
+    +Events
+        +Name
+            +String
+        +Image
+            +String
+                +URL(?)
+        +Tag Thingy
+            +Google maps Map pointer image
+        +Time
+            +Number(?)
+            +Default: 1200
+                +Write times as numbers without the ':'
+                    +ex:
+                        +1200
+                        +1500
+                        +2300
+        +Type (Food/Activity)
+            +Enum
+        +Coordinates
+            +Array of Numbers
+                + two Numbers --> Coordinates
+        +Priority
+            +Enum?
+        +Duration
+            +Number
+                +15 minute increments
+        +Keywords
+            +Array of Strings
+
+Routes
+    +Trip
+        +Post
+            +New Trip
+        +Put
+            +Update Trip
+        +Get
+            +Get Requested Trip
+    +Location
+        +Post
+            +New Location
+        +Put
+            +Update/Edit Location
+        +Get
+            +Get Location
+    +Day
+        +Post
+            +New Day
+        +Put
+            +Update Day
+        +Get
+            +Get Requested Day
+    Events
+        +Post
+            +New Event
+        +Put
+            +Update Event
+        +Get
+            +Get Requested Event
+
+
+
+
+
+
+
+
